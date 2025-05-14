@@ -5,6 +5,8 @@ import { useState, type ChangeEvent } from "react";
 
 // TODO：
 // 1. 最低保證金計算機：當L變動時，PV不變，IM不變，則最低保證金為？
+// 2. 如果清算價格在SL之外，則顯示爆倉
+// 3. 新增強平率，並提醒強平預警
 
 const CryptoPage = () => {
   // 設 IM = initialCapital（Initial Margin）
@@ -122,13 +124,13 @@ const CryptoPage = () => {
 
     // L=PV/IM
     const leverage = positionValue / initialCapital;
-    // if TP>AC 且 SL>AC，LIQ=AC*(100%/L)
-    // if TP<AC 且 SL<AC，LIQ=AC*(100%/L + 1)
-    // if TP>AC 且 SL<AC，LIQ=AC*(100%/L)
-    // if TP<AC 且 SL>AC，LIQ=AC*(100%/L + 1)
-    if (tp > avgCost && sl > avgCost) return (1 / leverage) * avgCost; // 多（套保）
+    // if TP>AC 且 SL>AC，LIQ=AC*(1 - 100%/L)
+    // if TP<AC 且 SL<AC，LIQ=AC*(1 + 100%/L)
+    // if TP>AC 且 SL<AC，LIQ=AC*(1 - 100%/L)
+    // if TP<AC 且 SL>AC，LIQ=AC*(1 + 100%/L)
+    if (tp > avgCost && sl > avgCost) return (1 - 1 / leverage) * avgCost; // 多（套保）
     if (tp < avgCost && sl < avgCost) return (1 + 1 / leverage) * avgCost; // 空（套保）
-    if (tp > avgCost) return (1 / leverage) * avgCost; // 多
+    if (tp > avgCost) return (1 - 1 / leverage) * avgCost; // 多
     if (tp < avgCost) return (1 + 1 / leverage) * avgCost; // 空
     return (1 / leverage) * avgCost; // 預設
   })();
@@ -223,7 +225,7 @@ const CryptoPage = () => {
         <Card title={"計算結果"} description={"倉位計算結果如下"}>
           <div className="flex flex-col gap-5">
             <ResultItem
-              label="實際槓桿"
+              label="實際槓桿："
               value={
                 initialCapital !== 0
                   ? (positionValue / initialCapital).toFixed(2)
@@ -232,16 +234,18 @@ const CryptoPage = () => {
             />
 
             <ResultItem
-              label="LIQ％"
+              label="LIQ％："
               value={liqPercent !== 0 ? `${liqPercent}%` : "0"}
             />
-            <ResultItem label="清算價格 (LIQ)" value={liqPrice.toFixed(2)} />
-            <ResultItem label="預估盈利" value={profit.toFixed(2)} />
-            <ResultItem label="預估虧損" value={loss.toFixed(2)} />
-            <ResultItem label="預估盈利率" value={`${profitRate * 100}%`} />
-            <ResultItem label="預估虧損率" value={`${lossRate * 100}%`} />
-            <ResultItem label="盈虧比" value={riskRewardRatio.toFixed(2)} />
-            <ResultItem label="倉位方向" value={positionType} />
+            <ResultItem label="清算價格：" value={liqPrice.toFixed(2)} />
+            <ResultItem label="預估盈利：" value={profit.toFixed(2)} />
+            <ResultItem label="預估虧損：" value={loss.toFixed(2)} />
+            <ResultItem label="預估盈利率：" value={`${profitRate * 100}%`} />
+            <ResultItem label="預估虧損率：" value={`${lossRate * 100}%`} />
+            <ResultItem label="盈虧比：" value={riskRewardRatio.toFixed(2)} />
+            <ResultItem label="倉位方向：" value={positionType} />
+            <ResultItem label="強平率：" value={"TODO"} />
+            <ResultItem label="爆倉否：" value={"TODO"} />
           </div>
         </Card>
       </div>
