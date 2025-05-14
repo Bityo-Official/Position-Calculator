@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
 
 export const metadata: Metadata = {
   title: "倉位試算 - 幣友",
@@ -13,7 +14,10 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en">
-      <body className="bg-gray-100">{children}</body>
+      <body className="bg-gray-100">
+        <NextTopLoader color="#17FFAC" />
+        {children}
+      </body>
     </html>
   );
 };
