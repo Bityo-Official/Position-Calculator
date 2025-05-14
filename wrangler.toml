@@ -2,7 +2,7 @@ name = "position-calculator"
 compatibility_date = "2024-09-23"
 compatibility_flags = [ "nodejs_compat" ]
 
-#pages_build_output_dir = ".vercel/output"
+pages_build_output_dir = ".vercel/output"
 
 # icompatibility_flags = [
  # "nodejs_compat",                             # ✅ 完整 flag 開啟 SSR 能力
