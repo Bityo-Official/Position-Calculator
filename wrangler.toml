@@ -1,0 +1,13 @@
+name = "position-calculator"
+compatibility_date = "2024-09-23"
+compatibility_flags = [ "nodejs_compat" ]
+
+#pages_build_output_dir = ".vercel/output"
+
+# icompatibility_flags = [
+ # "nodejs_compat",                             # ✅ 完整 flag 開啟 SSR 能力
+ # "nodejs_compat_populate_process_env",        # ✅ 處理 process.env 相容性
+ # "nodejs_compat_enable_require",              # ✅ 模擬 Node require 支援
+ # "nodejs_compat_enable_import_meta_resolve"   # ✅ 支援 import.meta.resolve
+#]
+
