@@ -12,7 +12,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }>) => {
   return (
-    <html lang="zh-TW">
+    <html lang="en">
       <body className="bg-gray-100">{children}</body>
     </html>
   );
