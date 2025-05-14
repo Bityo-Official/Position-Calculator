@@ -173,7 +173,7 @@ const CryptoPage = () => {
   })();
 
   return (
-    <div className="grid grid-cols-2 p-5 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 p-5 gap-5">
       <div>
         <Card
           title="加密貨幣永續合約 - 倉位計算"
