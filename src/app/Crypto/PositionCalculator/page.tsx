@@ -261,9 +261,12 @@ const CryptoPage = () => {
             <ResultItem label="預估實際虧損率：" value={`${lossRate * 100}%`} />
             <ResultItem
               label="預估槓桿盈利率："
-              value={`${profitRate * 100}%`}
+              value={`${profitRate * 100 * (positionValue / initialCapital)}%`}
             />
-            <ResultItem label="預估槓桿虧損率：" value={`${lossRate * 100}%`} />
+            <ResultItem
+              label="預估槓桿虧損率："
+              value={`${lossRate * 100 * (positionValue / initialCapital)}%`}
+            />
             <ResultItem label="盈虧比：" value={riskRewardRatio.toFixed(2)} />
             <ResultItem label="流動性方向：" value={positionType} />
             <ResultItem label="爆倉否：" value={isLiquidated} />
