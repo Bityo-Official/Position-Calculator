@@ -7,15 +7,34 @@ import BityoIcon from "@/image/bityo_bg_circle.png";
 import Navbar from "@/components/Navbar/Navbar";
 import { usePathname } from "next/navigation";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import {
+  faBarsProgress,
+  faBatteryFull,
+  faBatteryHalf,
+  faCalculator,
+  faChartColumn,
+  faGear,
+  faPeopleGroup,
+  faUpRightFromSquare,
+} from "@fortawesome/free-solid-svg-icons";
 
 const routeInfo = {
-  "/Crypto": { title: "投資計算機｜倉位計算", logo: BityoIcon },
-  "/Manage/News": { title: "投資計算機｜風險管理", logo: PenIcon },
-  "/Manage/Author": { title: "投資計算機｜倉位計算", logo: PenIcon },
-  "/Manage/Create/Post": { title: "投資計算機｜倉位計算", logo: PenIcon },
-  "/Manage/Create/Author": { title: "投資計算機｜倉位計算", logo: PenIcon },
-  "/Manage/Edit/Author": { title: "投資計算機｜倉位計算", logo: PenIcon },
-  "/Manage/Edit/Post": { title: "投資計算機｜倉位計算", logo: PenIcon },
+  "/Crypto/PositionCalculator": {
+    title: "投資計算機｜倉位計算",
+    logo: BityoIcon,
+  },
+  "/Crypto/RiskManagement": { title: "投資計算機｜風險管理", logo: PenIcon },
+  "/Crypto/CrossMarginCalculator": {
+    title: "投資計算機｜全倉試算",
+    logo: PenIcon,
+  },
+  "/Crypto/IsolatedMarginCalculator": {
+    title: "投資計算機｜逐倉試算",
+    logo: PenIcon,
+  },
+  "/Crypto/MarketSimulation": { title: "投資計算機｜行情模擬", logo: PenIcon },
+  "/Crypto/Setting": { title: "投資計算機｜本站設定", logo: PenIcon },
+  "/Crypto/AboutBityo": { title: "投資計算機｜關於幣友", logo: PenIcon },
 };
 
 const CryptoLayout = ({ children }: { children: ReactNode }) => {
@@ -27,14 +46,47 @@ const CryptoLayout = ({ children }: { children: ReactNode }) => {
   )?.[1] || { title: "投資計算機", logo: BityoIcon };
 
   const item = [
-    { name: "倉位計算", path: "/Manage/Post", icon: PenIcon },
-    { name: "風險管理", path: "/Manage/News", icon: PenIcon },
-    { name: "全倉試算", path: "/Manage/Author", icon: PenIcon },
-    { name: "逐倉試算", path: "/Manage/Author", icon: PenIcon },
-    { name: "行情模擬", path: "/Manage/Author", icon: PenIcon },
-    { name: "本站設定", path: "/Manage/Author", icon: PenIcon },
-    { name: "關於幣友", path: "/Manage/Author", icon: PenIcon },
-    { name: "幣友官網", path: "/Manage/Author", icon: PenIcon },
+    {
+      name: "倉位計算",
+      path: "/Crypto/PositionCalculator",
+      icon: faCalculator,
+    },
+    {
+      name: "風險管理",
+      path: "/Crypto/RiskManagement",
+      icon: faBarsProgress,
+      disabled: true,
+    },
+    {
+      name: "全倉試算",
+      path: "/Crypto/CrossMarginCalculator",
+      icon: faBatteryFull,
+      disabled: true,
+    },
+    {
+      name: "逐倉試算",
+      path: "/Crypto/IsolatedMarginCalculator",
+      icon: faBatteryHalf,
+      disabled: true,
+    },
+    {
+      name: "行情模擬",
+      path: "/Crypto/MarketSimulation",
+      icon: faChartColumn,
+      disabled: true,
+    },
+    { name: "本站設定", path: "/Crypto/Setting", icon: faGear, disabled: true },
+    {
+      name: "關於幣友",
+      path: "/Crypto/AboutBityo",
+      icon: faPeopleGroup,
+      disabled: true,
+    },
+    {
+      name: "幣友官網",
+      path: "https://bityo.tw",
+      icon: faUpRightFromSquare,
+    },
   ];
 
   return (
