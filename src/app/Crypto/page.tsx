@@ -6,7 +6,7 @@ import { useState, type ChangeEvent } from "react";
 // TODO：
 // 1. 最低保證金計算機：當L變動時，PV不變，IM不變，則最低保證金為？
 // 2. 如果清算價格在SL之外，則顯示爆倉
-// 3. 新增強平率，並提醒強平預警
+// 3. 新增保證金率，並提醒強平預警
 
 const CryptoPage = () => {
   // 設 IM = initialCapital（Initial Margin）
@@ -174,6 +174,19 @@ const CryptoPage = () => {
       : 0;
   })();
 
+  // 爆倉否
+  const isLiquidated = (() => {
+    // SL存在，且AC存在，且Q存在，執行以下命令
+    // （多頭）if SL>AC & SL<LIQ => 爆倉
+    // （空頭）if SL<AC & SL>LIQ => 爆倉
+    // else => 不爆倉
+    if (sl > 0 && avgCost > 0 && positionQuantity > 0) {
+      if (tp > avgCost && sl < liqPrice) return "爆倉";
+      if (tp < avgCost && sl > liqPrice) return "爆倉";
+    }
+    return "不爆倉";
+  })();
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 p-5 gap-5">
       <div>
@@ -244,8 +257,7 @@ const CryptoPage = () => {
             <ResultItem label="預估虧損率：" value={`${lossRate * 100}%`} />
             <ResultItem label="盈虧比：" value={riskRewardRatio.toFixed(2)} />
             <ResultItem label="倉位方向：" value={positionType} />
-            <ResultItem label="強平率：" value={"TODO"} />
-            <ResultItem label="爆倉否：" value={"TODO"} />
+            <ResultItem label="爆倉否：" value={isLiquidated} />
           </div>
         </Card>
       </div>

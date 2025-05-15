@@ -34,7 +34,7 @@ const Navbar = (props: NavbarProps) => {
       <button
         onClick={props.onSidebarBtnClick}
         type="button"
-        className="sm:hidden"
+        className="sm:hidden p-1 border-2 rounded-xl border-gray-500 active:bg-gray-200"
       >
         <Bars3Icon className="text-black w-6 h-6" />
       </button>
