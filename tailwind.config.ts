@@ -37,6 +37,7 @@ const config = {
       },
       colors: {
         btc: "#F7931A",
+        bityo: "#17FFAC",
         primary: {
           "black-100": "#000000",
           "black-200": "#373737",
