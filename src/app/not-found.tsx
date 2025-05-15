@@ -7,19 +7,22 @@ import { useRouter } from "nextjs-toploader/app";
 import SEO from "@/config/SEO.json";
 import type { ReactNode } from "react";
 
+const baseUrl = "https://bityo.tw";
+
 export const metadata = {
+  metadataBase: new URL(baseUrl),
   title: SEO.NotFound.title,
   description: SEO.NotFound.description,
   openGraph: {
     title: SEO.NotFound.title,
     description: SEO.NotFound.description,
-    images: [{ url: SEO.NotFound.image }],
+    images: [{ url: baseUrl + SEO.NotFound.image }],
     type: SEO.NotFound.type,
   },
   twitter: {
     title: SEO.NotFound.title,
     description: SEO.NotFound.description,
-    images: [SEO.NotFound.image],
+    images: [baseUrl + SEO.NotFound.image],
     card: "summary_large_image",
   },
 };
