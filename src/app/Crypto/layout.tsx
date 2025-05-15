@@ -26,15 +26,22 @@ const routeInfo = {
   "/Crypto/RiskManagement": { title: "投資計算機｜風險管理", logo: PenIcon },
   "/Crypto/CrossMarginCalculator": {
     title: "投資計算機｜全倉試算",
-    logo: PenIcon,
+    logo: BityoIcon,
   },
   "/Crypto/IsolatedMarginCalculator": {
     title: "投資計算機｜逐倉試算",
-    logo: PenIcon,
+    logo: BityoIcon,
   },
-  "/Crypto/MarketSimulation": { title: "投資計算機｜行情模擬", logo: PenIcon },
-  "/Crypto/Setting": { title: "投資計算機｜本站設定", logo: PenIcon },
-  "/Crypto/AboutBityo": { title: "投資計算機｜關於幣友", logo: PenIcon },
+  "/Crypto/DCA": {
+    title: "投資計算機｜定期定額專區",
+    logo: BityoIcon,
+  },
+  "/Crypto/MarketSimulation": {
+    title: "投資計算機｜行情模擬",
+    logo: BityoIcon,
+  },
+  "/Crypto/Setting": { title: "投資計算機｜本站設定", logo: BityoIcon },
+  "/Crypto/AboutBityo": { title: "投資計算機｜關於幣友", logo: BityoIcon },
 };
 
 const CryptoLayout = ({ children }: { children: ReactNode }) => {
@@ -50,6 +57,11 @@ const CryptoLayout = ({ children }: { children: ReactNode }) => {
       name: "倉位計算",
       path: "/Crypto/PositionCalculator",
       icon: faCalculator,
+    },
+    {
+      name: "定期定額",
+      path: "/Crypto/DCA",
+      icon: faBarsProgress,
     },
     {
       name: "風險管理",

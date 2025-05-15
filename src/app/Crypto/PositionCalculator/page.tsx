@@ -7,6 +7,7 @@ import { useState, type ChangeEvent } from "react";
 // 1. 最低保證金計算機：當L變動時，PV不變，IM不變，則最低保證金為？
 // 2. 如果清算價格在SL之外，則顯示爆倉
 // 3. 新增保證金率，並提醒強平預警
+// 4. 新增流動性類別（製造、掠奪），並且試算手續費
 
 const CryptoPage = () => {
   // 設 IM = initialCapital（Initial Margin）
@@ -196,37 +197,37 @@ const CryptoPage = () => {
         >
           <div className="flex flex-col w-full gap-5">
             <InputField
-              label="本金"
+              label="本金（您的初始保證金IM）"
               name="initialCapital"
               value={initialCapital}
               onChange={handleChange("initialCapital")}
             />
             <InputField
-              label="倉位價值"
+              label="倉位價值（倉位當前持倉均價的價值）"
               name="positionValue"
               value={positionValue}
               onChange={handleChange("positionValue")}
             />
             <InputField
-              label="持倉量"
+              label="持倉量（當前持有的數量）"
               name="positionQuantity"
               value={positionQuantity}
               onChange={handleChange("positionQuantity")}
             />
             <InputField
-              label="持倉均價"
+              label="持倉均價（您的平均倉位價格）"
               name="avgCost"
               value={avgCost}
               onChange={handleChange("avgCost")}
             />
             <InputField
-              label="止盈價"
+              label="止盈價（預估套利價格）"
               name="tp"
               value={tp}
               onChange={handleChange("tp")}
             />
             <InputField
-              label="止損價"
+              label="止損價（預估認賠價格）"
               name="sl"
               value={sl}
               onChange={handleChange("sl")}
@@ -253,10 +254,18 @@ const CryptoPage = () => {
             <ResultItem label="清算價格：" value={liqPrice.toFixed(2)} />
             <ResultItem label="預估盈利：" value={profit.toFixed(2)} />
             <ResultItem label="預估虧損：" value={loss.toFixed(2)} />
-            <ResultItem label="預估盈利率：" value={`${profitRate * 100}%`} />
-            <ResultItem label="預估虧損率：" value={`${lossRate * 100}%`} />
+            <ResultItem
+              label="預估實際盈利率："
+              value={`${profitRate * 100}%`}
+            />
+            <ResultItem label="預估實際虧損率：" value={`${lossRate * 100}%`} />
+            <ResultItem
+              label="預估槓桿盈利率："
+              value={`${profitRate * 100}%`}
+            />
+            <ResultItem label="預估槓桿虧損率：" value={`${lossRate * 100}%`} />
             <ResultItem label="盈虧比：" value={riskRewardRatio.toFixed(2)} />
-            <ResultItem label="倉位方向：" value={positionType} />
+            <ResultItem label="流動性方向：" value={positionType} />
             <ResultItem label="爆倉否：" value={isLiquidated} />
           </div>
         </Card>
