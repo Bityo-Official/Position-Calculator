@@ -1,4 +1,4 @@
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
+import type { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 interface SidebarItem {
   name: string;
@@ -7,7 +7,8 @@ interface SidebarItem {
 }
 
 export interface SidebarProps {
-  // isOpen: boolean;
+  isOpen: boolean;
+  onClose?: () => void;
   // toggleSidebar: () => void;
   items: SidebarItem[];
 }

@@ -3,6 +3,7 @@ import Image from "next/image";
 
 // image
 import NoHead from "@/image/pen.svg";
+import { Bars3Icon } from "@heroicons/react/20/solid";
 
 const Navbar = (props: NavbarProps) => {
   return (
@@ -29,8 +30,17 @@ const Navbar = (props: NavbarProps) => {
         </p>
       </div>
 
+      {/* 右邊Sidebar */}
+      <button
+        onClick={props.onSidebarBtnClick}
+        type="button"
+        className="sm:hidden"
+      >
+        <Bars3Icon className="text-black w-6 h-6" />
+      </button>
+
       {/* 右邊頭貼 */}
-      <div className="">
+      <div className="hidden sm:block">
         <Image
           src={NoHead}
           alt="login"
@@ -43,7 +53,7 @@ const Navbar = (props: NavbarProps) => {
       </div>
 
       {/* 右邊使用者名稱 */}
-      <div className="flex gap-2">
+      <div className="sm:flex sm:gap-2 hidden">
         <p className="text-base font-medium leading-[24px] text-[#040404]">
           {props.userName}
         </p>
