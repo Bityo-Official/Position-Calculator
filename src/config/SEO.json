@@ -1,0 +1,38 @@
+{
+  "Index": {
+    "title": "投資倉位計算機",
+    "description": "一個簡單的投資倉位計算機，幫助你計算投資的倉位。",
+    "image": "/bityo_bg_circle.png",
+    "type": "website",
+    "keyword": "倉位計算,Bityo,幣友,Crypto,加密,CryptoCurrency,加密貨幣,BTC,Bitcoin,比特幣,ETH,Ethereum,以太坊",
+    "author": "TershiXia",
+    "copyright": "Bityo"
+  },
+  "PositionCalculator": {
+    "title": "倉位計算｜投資倉位計算機",
+    "description": "計算您的當前倉位｜一個簡單的投資倉位計算機，幫助你計算投資的倉位。",
+    "image": "/bityo_bg_circle.png",
+    "type": "website",
+    "keyword": "倉位計算,Bityo,幣友,Crypto,加密,CryptoCurrency,加密貨幣,BTC,Bitcoin,比特幣,ETH,Ethereum,以太坊",
+    "author": "TershiXia",
+    "copyright": "Bityo"
+  },
+  "About": {
+    "title": "關於我們｜投資倉位計算機",
+    "description": "一個致力於研究區塊鏈和程式設計的台灣團隊，發展區塊鏈教育。",
+    "image": "/bityo_bg_circle.png",
+    "type": "website",
+    "keyword": "倉位計算,Bityo,幣友,Crypto,加密,CryptoCurrency,加密貨幣,BTC,Bitcoin,比特幣,ETH,Ethereum,以太坊",
+    "author": "TershiXia",
+    "copyright": "Bityo"
+  },
+  "NotFound": {
+    "title": "404頁面找不到｜投資倉位計算機",
+    "description": "喔不！QAQ，找不到這個頁面！",
+    "image": "/bityo_bg_circle.png",
+    "type": "website",
+    "keyword": "倉位計算,Bityo,幣友,Crypto,加密,CryptoCurrency,加密貨幣,BTC,Bitcoin,比特幣,ETH,Ethereum,以太坊",
+    "author": "TershiXia",
+    "copyright": "Bityo"
+  }
+}
