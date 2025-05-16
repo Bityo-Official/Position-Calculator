@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/Footer/Footer";
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import PenIcon from "@/image/pen.svg";
 import BityoIcon from "@/image/bityo_bg_circle.png";
 import Navbar from "@/components/Navbar/Navbar";

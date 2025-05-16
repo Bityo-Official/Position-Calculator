@@ -35,7 +35,10 @@ const Sidebar = (props: SidebarProps) => {
               <li key={item.name}>
                 <button
                   type="button"
-                  onClick={() => router.push(item.path)}
+                  onClick={() => {
+                    props.onClose();
+                    router.push(item.path);
+                  }}
                   disabled={item.disabled}
                   className={`flex items-center p-2 rounded-lg group w-full ${
                     isActive ? "bg-black/5" : "text-gray-900 hover:bg-black/10"
