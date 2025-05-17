@@ -1,10 +1,27 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import NextTopLoader from "nextjs-toploader";
+import SEO from "@/config/SEO.json";
 
-export const metadata: Metadata = {
-  title: "倉位試算 - 幣友",
-  description: "加密貨幣倉位計算機",
+const baseUrl = "https://bityo.tw";
+
+export const metadata = {
+  metadataBase: new URL(baseUrl),
+  title: SEO.Index.title,
+  description: SEO.Index.description,
+  image: baseUrl + SEO.Index.image,
+  openGraph: {
+    title: SEO.Index.title,
+    description: SEO.Index.description,
+    images: [{ url: baseUrl + SEO.Index.image }],
+    type: SEO.Index.type,
+  },
+  twitter: {
+    title: SEO.Index.title,
+    description: SEO.Index.description,
+    images: [baseUrl + SEO.Index.image],
+    card: "summary_large_image",
+  },
 };
 
 const RootLayout = ({

@@ -1,19 +1,54 @@
 "use client";
 // components/IntroSection.tsx
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import ScrollSmoother from "gsap/ScrollSmoother";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRouter } from "nextjs-toploader/app";
+import { SplitText } from "gsap/all";
+import { useGSAP } from "@gsap/react";
 
 export default function IntroSection() {
   const router = useRouter();
+  const container = useRef<HTMLDivElement>(null);
+  const contextSaft = useGSAP();
+  const { contextSafe } = useGSAP({ scope: container });
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollSmoother, ScrollTrigger, SplitText);
 
     const skewSetter = gsap.quickTo("img", "skewY");
     const clamp = gsap.utils.clamp(-20, 20);
+
+    const segmenter = new Intl.Segmenter("zh", { granularity: "word" });
+
+    SplitText.create(".intro", {
+      type: "words",
+      wordsClass: "word",
+      prepareText: (text, el) => {
+        return [...segmenter.segment(text)]
+          .map((s) => s.segment)
+          .join(String.fromCharCode(8204));
+      },
+      wordDelimiter: { delimiter: /\u200c/, replaceWith: " " },
+      autoSplit: true,
+      onSplit: (self) => {
+        return gsap.from(self.words, {
+          y: 50,
+          opacity: 0,
+          stagger: 0.1,
+          ease: "back",
+        });
+      },
+    });
+
+    // ScrollTrigger.create({
+    //   trigger: "#pin", // 被 Pin 的區塊
+    //   // pin: true,
+    //   start: "top top",
+    //   end: "bottom bottom",
+    //   pinSpacing: true,
+    // });
 
     ScrollSmoother.create({
       wrapper: "#wrapper",
@@ -26,59 +61,83 @@ export default function IntroSection() {
     });
   }, []);
 
+  const onBtnHover = contextSafe(() => {
+    gsap.to(".good", { rotation: 180 });
+  });
+
   return (
     <div
-      id="intro"
+      ref={container}
       className="relative w-full min-h-screen text-white overflow-x-hidden"
     >
       <div className="fixed inset-0 bg-[#1a1721] bg-cover bg-center bg-no-repeat" />
       <div className="fixed inset-0 bg-[url('https://cdn.bityo.tw/bityo_wallpaper_19201080.png')] bg-cover bg-center bg-no-repeat opacity-40" />
-      <div id="wrapper" className="inset-0 overflow-hidden">
-        {/* Scrolly Images：完全獨立，不被 ScrollSmoother 控制 */}
-        <h1 className="fixed top-1/2 w-full text-5xl sm:text-[8vw] text-center font-black -translate-y-1/2 z-[-2] text-white stroke-text stroke">
-          加密貨幣 <br />
-          投資計算機
-        </h1>
-        <button
-          onClick={() => router.push("/Crypto/PositionCalculator")}
-          type="button"
-          className="border-[1px] rounded-xl border-white text-center text-xl p-2 px-4 fixed bottom-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hover:text-white/80 hover:border-white/80"
-        >
-          點我試用
-        </button>
-        {/* biome-ignore lint/a11y/useHeadingContent: <explanation> */}
-        <h1
-          aria-hidden="true"
-          className="fixed top-1/2 w-full text-5xl sm:text-[8vw] text-center font-black -translate-y-1/2 z-[2] text-transparent stroke-text"
-        >
-          加密貨幣 <br />
-          投資計算機 <br />
-        </h1>
-        {/* biome-ignore lint/a11y/useHeadingContent: <explanation> */}
-        <h1
-          aria-hidden="true"
-          className="fixed top-1/2 w-full text-5xl sm:text-[8vw] text-center font-black -translate-y-1/2 z-[2] text-[#804691] mix-blend-screen"
-        >
-          加密貨幣 <br />
-          投資計算機
-        </h1>
 
-        {/* ScrollSmoother 控制的區域 */}
-        <div id="content" className="w-full overflow-visible">
-          <section className="images relative w-full max-w-[1200px] min-h-[300vh] sm:min-h-[150vh] grid grid-cols-[repeat(20,_2%)] grid-rows-[repeat(30,_3%)] mx-auto pt-[60vh] justify-center justify-items-center items-center">
-            {imageData.map((src, idx) => (
-              <img
-                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
-                key={idx}
-                src={src.url}
-                data-speed={src.speed}
-                alt=""
-                className={src.className}
-              />
-            ))}
-          </section>
+      <section id="pin">
+        <div id="wrapper" className="inset-0 overflow-hidden">
+          <h1 className="intro fixed top-1/2 w-full text-5xl sm:text-[8vw] text-center font-black -translate-y-1/2 z-[-2] text-white stroke-text stroke">
+            加密貨幣 <br />
+            投資計算機
+          </h1>
+          <button
+            onClick={() => {
+              router.push("/Crypto/PositionCalculator");
+            }}
+            type="button"
+            onMouseEnter={contextSafe(() => {
+              gsap.to(".try-btn", {
+                scale: 1.08,
+                rotate: 5,
+                backgroundColor: "#17FFAC",
+                duration: 0.3,
+              });
+            })}
+            onMouseLeave={contextSafe(() => {
+              gsap.to(".try-btn", {
+                scale: 1,
+                rotate: 0,
+                backgroundColor: "transparent",
+                duration: 0.3,
+              });
+            })}
+            className="try-btn border-[1px] rounded-xl border-white text-center text-xl p-2 px-4 fixed bottom-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 hover:text-white/80 hover:border-white/80"
+          >
+            點我試用
+          </button>
+          {/* biome-ignore lint/a11y/useHeadingContent: <explanation> */}
+          <h1
+            aria-hidden="true"
+            className="intro fixed top-1/2 w-full text-5xl sm:text-[8vw] text-center font-black -translate-y-1/2 z-[2] text-transparent stroke-text"
+          >
+            加密貨幣 <br />
+            投資計算機 <br />
+          </h1>
+          {/* biome-ignore lint/a11y/useHeadingContent: <explanation> */}
+          <h1
+            aria-hidden="true"
+            className="intro fixed top-1/2 w-full text-5xl sm:text-[8vw] text-center font-black -translate-y-1/2 z-[2] text-[#804691] mix-blend-screen"
+          >
+            加密貨幣 <br />
+            投資計算機
+          </h1>
+
+          {/* ScrollSmoother 控制的區域 */}
+          <div id="content" className="w-full overflow-visible">
+            <section className="images relative w-full max-w-[1200px] min-h-[300vh] sm:min-h-[150vh] grid grid-cols-[repeat(20,_2%)] grid-rows-[repeat(30,_3%)] mx-auto pt-[60vh] justify-center justify-items-center items-center">
+              {imageData.map((src, idx) => (
+                <img
+                  // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
+                  key={idx}
+                  src={src.url}
+                  data-speed={src.speed}
+                  alt=""
+                  className={src.className}
+                />
+              ))}
+            </section>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

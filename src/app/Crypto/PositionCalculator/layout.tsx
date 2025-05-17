@@ -7,6 +7,7 @@ export const metadata = {
   metadataBase: new URL(baseUrl),
   title: SEO.PositionCalculator.title,
   description: SEO.PositionCalculator.description,
+  image: baseUrl + SEO.PositionCalculator.image,
   openGraph: {
     title: SEO.PositionCalculator.title,
     description: SEO.PositionCalculator.description,

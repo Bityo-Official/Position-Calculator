@@ -5,6 +5,7 @@ import IntroSection from "./_components/IntroSection";
 
 const Home = () => {
   // redirect("/Crypto/PositionCalculator");
+
   return (
     <main className="text-white bg-black overflow-x-hidden">
       <IntroSection />

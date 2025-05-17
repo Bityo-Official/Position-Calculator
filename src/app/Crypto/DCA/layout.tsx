@@ -7,6 +7,7 @@ export const metadata = {
   metadataBase: new URL(baseUrl),
   title: SEO.DCA.title,
   description: SEO.DCA.description,
+  image: baseUrl + SEO.DCA.image,
   openGraph: {
     title: SEO.DCA.title,
     description: SEO.DCA.description,
